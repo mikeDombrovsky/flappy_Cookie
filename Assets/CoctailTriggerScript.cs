@@ -17,8 +17,8 @@ public class CoctailTriggerScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger will enter by: " + collision.gameObject.name);
-        logic.addScore(); // Call the addScore method from TrackScoreScript when the trigger is entered
+        if(collision.gameObject.layer != 3) { return; }
+        logic.addScore(1); // Call the addScore method from TrackScoreScript when the trigger is entered
         Debug.Log("Trigger entered by: " + collision.gameObject.name);
         
     }
