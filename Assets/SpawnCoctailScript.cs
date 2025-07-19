@@ -9,7 +9,7 @@ public class SpawnCoctailScript : MonoBehaviour
     public float hightOffset = 10f;
     void Start()
     {
-        spawnCocrail();
+        spawnCoctail();
     }
 
     // Update is called once per frame
@@ -21,13 +21,13 @@ public class SpawnCoctailScript : MonoBehaviour
         }
         else
         {
-            spawnCocrail();
+            spawnCoctail();
             timer = 0;
         }
            
     }
 
-    void spawnCocrail()
+    void spawnCoctail()
     {
         float lowestY = transform.position.y - hightOffset;
         float highestY = transform.position.y + hightOffset;
