@@ -3,7 +3,7 @@ using UnityEngine;
 public class BirdFlyScript : MonoBehaviour
 {
     public Rigidbody2D myRigidBody;
-    public float flapStrength = 7;
+    public float flapStrength = 6;
     public LogicScript logic;
     public bool isBirdAlive = true; // Flag to check if the bird is active
 

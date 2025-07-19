@@ -857,7 +857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidBody: {fileID: 638716691}
-  flapStrength: 10
+  flapStrength: 6
   logic: {fileID: 0}
   isBirdAlive: 1
 --- !u!58 &638716693
@@ -894,8 +894,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.13, y: 0}
-  m_Radius: 1.14
+  m_Offset: {x: -0.12999989, y: -0.0000012230564}
+  m_Radius: 1.140001
 --- !u!1 &1003889071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coctail: {fileID: 3373923618836722566, guid: ae79d6e4980e5ee44bc6296d4ff54fc1, type: 3}
-  spawnRate: 2
+  spawnRate: 3
   hightOffset: 10
 --- !u!4 &1867625686
 Transform:

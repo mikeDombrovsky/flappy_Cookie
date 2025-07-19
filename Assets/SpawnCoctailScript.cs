@@ -4,7 +4,7 @@ public class SpawnCoctailScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject coctail;
-    public float spawnRate = 2;
+    public float spawnRate = 3;
     private float timer = 0;
     public float hightOffset = 10f;
     void Start()
