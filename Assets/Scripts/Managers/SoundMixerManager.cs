@@ -7,14 +7,15 @@ public class SoundMixerManager : MonoBehaviour
 
     public void SetMasterVolume(float level)
     {
-        audioMixer.SetFloat("masterVolume", level);
+        //audioMixer.SetFloat("masterVolume", level);
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(level) * 20); // Convert linear volume to logarithmic scale
     }
     public void SetSoundFXVolume(float level)
     {
-        audioMixer.SetFloat("soundFXVolume", level);
+        audioMixer.SetFloat("soundFXVolume", Mathf.Log10(level) * 20);
     }
     public void SetMusicVolume(float level)
     {
-        audioMixer.SetFloat("musicVolume", level);
+        audioMixer.SetFloat("musicVolume", Mathf.Log10(level) * 20);
     }
 }

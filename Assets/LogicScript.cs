@@ -25,7 +25,7 @@ public class LogicScript : MonoBehaviour
         scoreText.text = playerScore.ToString();
         
         // Play the main audio at the start of the game
-        SoundFXManager.Instance.PlaySoundFXClip(mainAudio, transform, 0.5f);
+        //SoundFXManager.Instance.PlaySoundFXClip(mainAudio, transform, 0.5f);
     }
 
     public void restartGame()
