@@ -7,6 +7,10 @@ public class LogicScript : MonoBehaviour
     public int playerScore = 0;
     public Text scoreText;
     public GameObject gameOverScreen;
+
+    public GameObject pauseMenu; // Assign this in the inspector with your pause menu GameObject
+    public bool isPauseActive = false;
+
     public AudioClip gameOverSound; // Assign this in the inspector with your game over sound clip
     public AudioClip scoreSound; // Assign this in the inspector with your score sound clip
     public AudioClip mainAudio; // Assign this in the inspector with your main audio clip
@@ -23,9 +27,23 @@ public class LogicScript : MonoBehaviour
     {
         // Initialize the score text
         scoreText.text = playerScore.ToString();
-        
-        // Play the main audio at the start of the game
-        //SoundFXManager.Instance.PlaySoundFXClip(mainAudio, transform, 0.5f);
+        // find the pause menu
+        pauseMenu = GameObject.Find("PauseMenuCanvas");
+        if (pauseMenu == null)
+        {
+            Debug.LogError("Pause menu not found! Make sure it exists in the scene."); return;
+        }
+        pauseMenu.SetActive(false); // Ensure the pause menu is initially inactive
+    }
+    private void Update()
+    {       
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseMenu != null)
+            {
+                TogglePauseMenu();
+            }
+        }
     }
 
     public void restartGame()
@@ -37,6 +55,15 @@ public class LogicScript : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 0.5f); // Play the game over sound effect
+    }
+
+    public void TogglePauseMenu()
+    {
+        if (pauseMenu != null)
+        {
+            isPauseActive = !isPauseActive; // Toggle the state
+            pauseMenu.SetActive(isPauseActive); // Set the active state of the pause menu
+        }
     }
 
     public void quitGame()
