@@ -63,7 +63,6 @@ public class LogicScript : MonoBehaviour
         {
             isPauseActive = !isPauseActive; // Toggle the state
             pauseMenu.SetActive(isPauseActive); // Set the active state of the pause menu
-
             Time.timeScale = isPauseActive ? 0f : 1f; // Pause or resume the game
         }
     }
