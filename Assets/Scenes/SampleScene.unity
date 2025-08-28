@@ -401,15 +401,7 @@ GameObject:
   - component: {fileID: 273728830}
   - component: {fileID: 273728829}
   m_Layer: 5
-<<<<<<< HEAD
-<<<<<<< Updated upstream
   m_Name: Canvas
-=======
-  m_Name: GameCanvas
->>>>>>> Stashed changes
-=======
-  m_Name: GameOverCanvas
->>>>>>> sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1149,8 +1141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-=======
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
   m_RaycastTarget: 1
@@ -1375,7 +1365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
->>>>>>> sound
   m_ComponentVersion: 2
   m_LightType: 4
   m_BlendStyleIndex: 0
@@ -1417,11 +1406,6 @@ MonoBehaviour:
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
 --- !u!4 &619394802
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> sound
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2775,10 +2759,6 @@ MonoBehaviour:
   heightOffset: 7
   depthOffset: 5
 --- !u!4 &1731515873
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> sound
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
