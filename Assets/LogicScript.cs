@@ -8,13 +8,18 @@ public class LogicScript : MonoBehaviour
     public Text scoreText;
     public GameObject gameOverScreen;
 
+    public GameObject pauseMenu; // Assign this in the inspector with your pause menu GameObject
+    public bool isPauseActive = false;
+
+    public AudioClip gameOverSound; // Assign this in the inspector with your game over sound clip
+    public AudioClip scoreSound; // Assign this in the inspector with your score sound clip
+    public AudioClip mainAudio; // Assign this in the inspector with your main audio clip
+
     [ContextMenu("Increase Score")]
     public void addScore(int scoreToAdd)
     {
         playerScore += scoreToAdd;
         scoreText.text = playerScore.ToString();
-<<<<<<< Updated upstream
-=======
         SoundFXManager.Instance.PlaySoundFXClip(scoreSound, transform, 1f); // Play the score sound effect
     }
 
@@ -39,21 +44,16 @@ public class LogicScript : MonoBehaviour
                 TogglePauseMenu();
             }
         }
-
->>>>>>> Stashed changes
     }
 
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
     }
 
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
-<<<<<<< Updated upstream
-=======
         SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 0.5f); // Play the game over sound effect
     }
 
@@ -63,9 +63,9 @@ public class LogicScript : MonoBehaviour
         {
             isPauseActive = !isPauseActive; // Toggle the state
             pauseMenu.SetActive(isPauseActive); // Set the active state of the pause menu
+
             Time.timeScale = isPauseActive ? 0f : 1f; // Pause or resume the game
         }
->>>>>>> Stashed changes
     }
 
     public void quitGame()
