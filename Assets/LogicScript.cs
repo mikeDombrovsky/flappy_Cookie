@@ -10,6 +10,7 @@ public class LogicScript : MonoBehaviour
 
     public GameObject pauseMenu; // Assign this in the inspector with your pause menu GameObject
     public bool isPauseActive = false;
+    SoundMixerManager mixer;
 
     public AudioClip gameOverSound; // Assign this in the inspector with your game over sound clip
     public AudioClip scoreSound; // Assign this in the inspector with your score sound clip
@@ -34,6 +35,7 @@ public class LogicScript : MonoBehaviour
             Debug.LogError("Pause menu not found! Make sure it exists in the scene."); return;
         }
         pauseMenu.SetActive(false); // Ensure the pause menu is initially inactive
+        mixer = Object.FindFirstObjectByType<SoundMixerManager>();// Find the SoundMixerManager in the scene
     }
     private void Update()
     {       
@@ -49,12 +51,14 @@ public class LogicScript : MonoBehaviour
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        mixer.SetMusicVolume(1f); // Restore the music volume
     }
 
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
-        SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 0.5f); // Play the game over sound effect
+        mixer.SetMusicVolume(0.1f); // Lower the music volume
+        SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 1f); // Play the game over sound effect
     }
 
     public void TogglePauseMenu()
