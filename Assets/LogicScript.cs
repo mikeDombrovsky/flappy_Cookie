@@ -35,7 +35,8 @@ public class LogicScript : MonoBehaviour
             Debug.LogError("Pause menu not found! Make sure it exists in the scene."); return;
         }
         pauseMenu.SetActive(false); // Ensure the pause menu is initially inactive
-        mixer = Object.FindFirstObjectByType<SoundMixerManager>();// Find the SoundMixerManager in the scene
+        mixer = FindFirstObjectByType<SoundMixerManager>();// Find the SoundMixerManager in the scene
+        mixer.SetMusicVolume(0.2f); // Set initial music volume !!!DOESN'T WORK!!!
     }
     private void Update()
     {       
@@ -51,7 +52,7 @@ public class LogicScript : MonoBehaviour
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        mixer.SetMusicVolume(1f); // Restore the music volume
+        mixer.SetMusicVolume(0.2f); // Restore the music volume
     }
 
     public void gameOver()
