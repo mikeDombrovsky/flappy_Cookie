@@ -16,6 +16,8 @@ public class LogicScript : MonoBehaviour
     public AudioClip scoreSound; // Assign this in the inspector with your score sound clip
     public AudioClip mainAudio; // Assign this in the inspector with your main audio clip
 
+    private Logger logger; // Move logger to a field to avoid unnecessary assignment
+
     [ContextMenu("Increase Score")]
     public void addScore(int scoreToAdd)
     {
@@ -35,11 +37,14 @@ public class LogicScript : MonoBehaviour
             Debug.LogError("Pause menu not found! Make sure it exists in the scene."); return;
         }
         pauseMenu.SetActive(false); // Ensure the pause menu is initially inactive
+
         mixer = FindFirstObjectByType<SoundMixerManager>();// Find the SoundMixerManager in the scene
-        mixer.SetMusicVolume(0.2f); // Set initial music volume !!!DOESN'T WORK!!!
+        mixer.SetMusicVolume(0.2f); // Set initial music volume
+        
+        logger = new(Debug.unityLogger.logHandler); // Assign logger to field instead of local variable
     }
     private void Update()
-    {       
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseMenu != null)
@@ -59,6 +64,8 @@ public class LogicScript : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         mixer.SetMusicVolume(0.1f); // Lower the music volume
+        logger.Log("music_volume", mixer.GetMusicVolume()); // Log the current music volume
+
         SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 1f); // Play the game over sound effect
     }
 
@@ -75,8 +82,8 @@ public class LogicScript : MonoBehaviour
     public void quitGame()
     {
         Application.Quit();
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false; // Stop playing in the editor
-        #endif
-    }   
+#endif
+    }
 }

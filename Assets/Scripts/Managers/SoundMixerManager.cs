@@ -18,4 +18,20 @@ public class SoundMixerManager : MonoBehaviour
     {
         audioMixer.SetFloat("musicVolume", Mathf.Log10(level) * 20);
     }
+
+    public float GetMasterVolume()
+    {
+        audioMixer.GetFloat("masterVolume", out float level);
+        return Mathf.Pow(10, level / 20); // Convert back to linear scale
+    }
+    public float GetSoundFXVolume()
+    {
+        audioMixer.GetFloat("soundFXVolume", out float level);
+        return Mathf.Pow(10, level / 20);
+    }
+    public float GetMusicVolume()
+    {
+        audioMixer.GetFloat("musicVolume", out float level);
+        return Mathf.Pow(10, level / 20);
+    }
 }
