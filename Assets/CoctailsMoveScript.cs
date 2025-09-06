@@ -5,10 +5,6 @@ public class CoctailsMoveScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float moveSpeed = 7f; // Speed at which the cocktail moves
     public float destroyPositionX = -45f; // X position at which the cocktail will be destroyed
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

@@ -31,6 +31,7 @@ public class BirdFlyScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!isBirdAlive) return; // If the bird is already not alive, do nothing
         StopGame(); // Call the method to handle game over on collision
     }
 

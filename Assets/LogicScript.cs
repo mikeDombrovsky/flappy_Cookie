@@ -16,7 +16,7 @@ public class LogicScript : MonoBehaviour
     public AudioClip scoreSound; // Assign this in the inspector with your score sound clip
     public AudioClip mainAudio; // Assign this in the inspector with your main audio clip
 
-    private Logger logger; // Move logger to a field to avoid unnecessary assignment
+    private Logger logger;
 
     [ContextMenu("Increase Score")]
     public void addScore(int scoreToAdd)

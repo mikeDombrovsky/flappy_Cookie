@@ -20,6 +20,5 @@ public class CoctailTriggerScript : MonoBehaviour
         if(collision.gameObject.layer != 3) { return; }
         logic.addScore(1); // Call the addScore method from TrackScoreScript when the trigger is entered
         Debug.Log("Trigger entered by: " + collision.gameObject.name);
-        
     }
 }
