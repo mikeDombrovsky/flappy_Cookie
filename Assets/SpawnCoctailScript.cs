@@ -32,5 +32,6 @@ public class SpawnCoctailScript : MonoBehaviour
         float lowestY = transform.position.y - hightOffset;
         float highestY = transform.position.y + hightOffset;
         Instantiate(coctail, new Vector3(transform.position.x, Random.Range(lowestY, highestY),0), transform.rotation);
+        Debug.Log("Spawned cocktail at: " + new Vector3(transform.position.x, Random.Range(lowestY, highestY),0) );
     }
 }

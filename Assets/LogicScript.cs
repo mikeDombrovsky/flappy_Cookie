@@ -16,8 +16,6 @@ public class LogicScript : MonoBehaviour
     public AudioClip scoreSound; // Assign this in the inspector with your score sound clip
     public AudioClip mainAudio; // Assign this in the inspector with your main audio clip
 
-    private Logger logger;
-
     [ContextMenu("Increase Score")]
     public void addScore(int scoreToAdd)
     {
@@ -40,8 +38,6 @@ public class LogicScript : MonoBehaviour
 
         mixer = FindFirstObjectByType<SoundMixerManager>();// Find the SoundMixerManager in the scene
         mixer.SetMusicVolume(0.2f); // Set initial music volume
-        
-        logger = new(Debug.unityLogger.logHandler); // Assign logger to field instead of local variable
     }
     private void Update()
     {
@@ -64,7 +60,7 @@ public class LogicScript : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         mixer.SetMusicVolume(0.1f); // Lower the music volume
-        logger.Log("music_volume", mixer.GetMusicVolume()); // Log the current music volume
+        Debug.Log("music_volume: " + mixer.GetMusicVolume()); // Log the current music volume
 
         SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 1f); // Play the game over sound effect
     }
