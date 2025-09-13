@@ -38,6 +38,7 @@ public class LogicScript : MonoBehaviour
 
         mixer = FindFirstObjectByType<SoundMixerManager>();// Find the SoundMixerManager in the scene
         mixer.SetMusicVolume(0.2f); // Set initial music volume
+        
     }
     private void Update()
     {
