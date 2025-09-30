@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class LogicScript : MonoBehaviour
 {
-    public int playerScore = 0;
+    private GameObject ScenesManager;
+    public int playerScore;
     public Text scoreText;
     public GameObject gameOverScreen;
 
@@ -16,16 +17,12 @@ public class LogicScript : MonoBehaviour
     public AudioClip scoreSound; // Assign this in the inspector with your score sound clip
     public AudioClip mainAudio; // Assign this in the inspector with your main audio clip
 
-    [ContextMenu("Increase Score")]
-    public void addScore(int scoreToAdd)
-    {
-        playerScore += scoreToAdd;
-        scoreText.text = playerScore.ToString();
-        SoundFXManager.Instance.PlaySoundFXClip(scoreSound, transform, 1f); // Play the score sound effect
-    }
+    
 
     private void Start()
     {
+        ScenesManager = GameObject.Find("ScenesManager");
+        playerScore = PlayerPrefs.GetInt("playerScore", 0); // Load the score from PlayerPrefs, default to 0 if not found
         // Initialize the score text
         scoreText.text = playerScore.ToString();
         // find the pause menu
@@ -51,6 +48,35 @@ public class LogicScript : MonoBehaviour
         }
     }
 
+    [ContextMenu("Increase Score")]
+    public void addScore(int scoreToAdd)
+    {
+        playerScore += scoreToAdd;
+        PlayerPrefs.SetInt("playerScore", playerScore); // Save the score to PlayerPrefs
+        scoreText.text = playerScore.ToString();
+        SoundFXManager.Instance.PlaySoundFXClip(scoreSound, transform, 1f); // Play the score sound effect
+        if (playerScore >= 5 && playerScore < 10 && SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            ScenesManager.GetComponent<SceneManagerScript>().LoadSceneByIndex(1);
+        }
+    }
+
+    public void resetScore()
+    {
+        if (playerScore < 5)
+        {
+            playerScore = 0;
+        }
+        else if (playerScore >= 5 && playerScore < 10)
+        {
+            playerScore = 5;
+        }
+
+        scoreText.text = playerScore.ToString();
+        PlayerPrefs.SetInt("playerScore", playerScore); // Save the score to PlayerPrefs
+    }
+
+
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -62,7 +88,7 @@ public class LogicScript : MonoBehaviour
         gameOverScreen.SetActive(true);
         mixer.SetMusicVolume(0.1f); // Lower the music volume
         Debug.Log("music_volume: " + mixer.GetMusicVolume()); // Log the current music volume
-
+        resetScore();
         SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 1f); // Play the game over sound effect
     }
 
@@ -78,6 +104,7 @@ public class LogicScript : MonoBehaviour
 
     public void quitGame()
     {
+        resetScore();
         Application.Quit();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false; // Stop playing in the editor
