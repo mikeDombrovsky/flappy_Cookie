@@ -16,11 +16,12 @@ public class PauseMenuScript : MonoBehaviour
         FXSlider = GameObject.Find("SoundFXVolumeSlider");
          if (soundMixerManager == null || allSoundSlider == null || musicSlider == null || FXSlider == null)
          {
-              Debug.LogError("One or more sliders not found! Make sure they exist in the scene.");
+                Debug.LogError("soundMixerManager or One or more sliders not found! Make sure they exist in the scene.");
+                Debug.LogError("soundMixerManager: " + (soundMixerManager == null ? "null" : "found"));
+                Debug.LogError("allSoundSlider: " + (allSoundSlider == null ? "null" : "found"));
+                Debug.LogError("musicSlider: " + (musicSlider == null ? "null" : "found"));
+                Debug.LogError("FXSlider: " + (FXSlider == null ? "null" : "found"));
         }
-        allSoundSlider.GetComponent<UnityEngine.UI.Slider>().value = soundMixerManager.GetMasterVolume();
-        musicSlider.GetComponent<UnityEngine.UI.Slider>().value = soundMixerManager.GetMusicVolume();
-        FXSlider.GetComponent<UnityEngine.UI.Slider>().value = soundMixerManager.GetSoundFXVolume();
     }
 
     // Update is called once per frame
