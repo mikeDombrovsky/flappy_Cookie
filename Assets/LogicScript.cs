@@ -23,10 +23,8 @@ public class LogicScript : MonoBehaviour
     {
         ScenesManager = GameObject.Find("ScenesManager");
         playerScore = PlayerPrefs.GetInt("playerScore", 0); // Load the score from PlayerPrefs, default to 0 if not found
-        // Initialize the score text
-        scoreText.text = playerScore.ToString();
-        // find the pause menu
-        pauseMenu = GameObject.Find("PauseMenuCanvas");
+        scoreText.text = playerScore.ToString();// Initialize the score text
+        pauseMenu = GameObject.Find("PauseMenuCanvas");// find the pause menu
         if (pauseMenu == null)
         {
             Debug.LogError("Pause menu not found! Make sure it exists in the scene."); return;
@@ -55,9 +53,14 @@ public class LogicScript : MonoBehaviour
         PlayerPrefs.SetInt("playerScore", playerScore); // Save the score to PlayerPrefs
         scoreText.text = playerScore.ToString();
         SoundFXManager.Instance.PlaySoundFXClip(scoreSound, transform, 1f); // Play the score sound effect
+
         if (playerScore >= 5 && playerScore < 10 && SceneManager.GetActiveScene().buildIndex == 0)
         {
             ScenesManager.GetComponent<SceneManagerScript>().LoadSceneByIndex(1);
+        }
+        else if (playerScore >= 10 && SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            ScenesManager.GetComponent<SceneManagerScript>().LoadSceneByIndex(2);
         }
     }
 
@@ -79,6 +82,7 @@ public class LogicScript : MonoBehaviour
 
     public void restartGame()
     {
+        resetScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         mixer.SetMusicVolume(0.2f); // Restore the music volume
     }
@@ -86,9 +90,9 @@ public class LogicScript : MonoBehaviour
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
+        resetScore();
         mixer.SetMusicVolume(0.1f); // Lower the music volume
         Debug.Log("music_volume: " + mixer.GetMusicVolume()); // Log the current music volume
-        resetScore();
         SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 1f); // Play the game over sound effect
     }
 
