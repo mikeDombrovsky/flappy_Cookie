@@ -60,6 +60,7 @@ public class LogicScript : MonoBehaviour
         }
         else if (playerScore >= 10 && SceneManager.GetActiveScene().buildIndex == 1)
         {
+            resetScore();
             ScenesManager.GetComponent<SceneManagerScript>().LoadSceneByIndex(2);
         }
     }
@@ -73,6 +74,9 @@ public class LogicScript : MonoBehaviour
         else if (playerScore >= 5 && playerScore < 10)
         {
             playerScore = 5;
+        }else if (playerScore >= 10)
+        {
+            playerScore = 0;
         }
 
         scoreText.text = playerScore.ToString();
