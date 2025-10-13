@@ -11,7 +11,7 @@ public class PauseMenuScript : MonoBehaviour
     void Start()
     {
         soundMixerManager = FindFirstObjectByType<SoundMixerManager>();// Find SoundMixerManager instance using FindFirstObjectByType
-        allSoundSlider = GameObject.Find("MasterVolumelider");
+        allSoundSlider = GameObject.Find("MasterVolumeSlider");
         musicSlider = GameObject.Find("MusicVolumeSlider");
         FXSlider = GameObject.Find("SoundFXVolumeSlider");
          if (soundMixerManager == null || allSoundSlider == null || musicSlider == null || FXSlider == null)
