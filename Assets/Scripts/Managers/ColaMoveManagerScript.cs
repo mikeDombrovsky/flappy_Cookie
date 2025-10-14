@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+using System;
+
 
 public class ColaMoveScript : MonoBehaviour
 {
@@ -9,10 +12,11 @@ public class ColaMoveScript : MonoBehaviour
     public float maxScale = 1.3f;
     public float minScale = 0.5f;
     private bool isGrowing = true;
+    private bool canPerformAction = true;
     void Start()
     {
         colaImage = GameObject.Find("ColaImage");
-        youWonText = GameObject.Find("YouWonText");
+        youWonText = GameObject.Find("YouWonText(TMP)");
         if (colaImage == null)
         {
             Debug.LogError("ColaImage not found! Make sure it exist in the scene.");
@@ -28,6 +32,14 @@ public class ColaMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (canPerformAction)
+        {
+            StartCoroutine(DelayedAction(pulseCola));
+        }
+    }
+
+    void pulseCola()
+    {
         if (isObjBiggerThan(colaImage, maxScale))
         {
             isGrowing = false;
@@ -36,27 +48,45 @@ public class ColaMoveScript : MonoBehaviour
         {
             isGrowing = true;
         }
-        
+
         if (isGrowing)
         {
             makeObjBigger(colaImage);
-            //makeObjBigger(youWonText);
+            makeObjBigger(youWonText);
         }
         else
         {
             makeObjSmaller(colaImage);
-            //makeObjSmaller(youWonText);
+            makeObjSmaller(youWonText);
         }
     }
+    IEnumerator DelayedAction(Action methodToCall)
+    {
+        canPerformAction = false;
+        Debug.Log("Starting delayed action...");
 
+        // Wait for 0.2 seconds using scaled time
+        yield return new WaitForSeconds(0.2f);
+
+        Debug.Log("Action performed after 0.2 seconds!");
+
+        // Call the provided method after the delay
+        methodToCall?.Invoke();
+
+        // You can also wait using unscaled time (ignoring Time.timeScale)
+        // yield return new WaitForSecondsRealtime(3f);
+        canPerformAction = true;
+    }
     void makeObjBigger(GameObject obj)
     {
-        obj.transform.localScale += new Vector3(0.1f, 0.1f, 0);
+        obj.transform.localScale += new Vector3(0.01f, 0.01f, 0);
     }
 
-    void makeObjSmaller(GameObject obj)
+
+
+void makeObjSmaller(GameObject obj)
     {
-        obj.transform.localScale -= new Vector3(0.1f, 0.1f, 0);
+        obj.transform.localScale -= new Vector3(0.01f, 0.01f, 0);
     }
 
     bool isObjBiggerThan(GameObject obj, float maxScaleLimit)
