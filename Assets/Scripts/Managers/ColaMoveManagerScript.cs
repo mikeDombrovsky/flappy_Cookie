@@ -9,8 +9,8 @@ public class ColaMoveScript : MonoBehaviour
     private GameObject colaImage;
     private GameObject youWonText;
     
-    public float maxScale = 1.3f;
-    public float minScale = 0.5f;
+    public float maxScale = 1.1f;
+    public float minScale = 0.7f;
     private bool isGrowing = true;
     private bool canPerformAction = true;
     void Start()
@@ -66,9 +66,9 @@ public class ColaMoveScript : MonoBehaviour
         Debug.Log("Starting delayed action...");
 
         // Wait for 0.2 seconds using scaled time
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.02f);
 
-        Debug.Log("Action performed after 0.2 seconds!");
+        Debug.Log("Action performed after 0.1 seconds!");
 
         // Call the provided method after the delay
         methodToCall?.Invoke();
@@ -79,14 +79,14 @@ public class ColaMoveScript : MonoBehaviour
     }
     void makeObjBigger(GameObject obj)
     {
-        obj.transform.localScale += new Vector3(0.01f, 0.01f, 0);
+        obj.transform.localScale += new Vector3(0.002f, 0.002f, 0);
     }
 
 
 
 void makeObjSmaller(GameObject obj)
     {
-        obj.transform.localScale -= new Vector3(0.01f, 0.01f, 0);
+        obj.transform.localScale -= new Vector3(0.002f, 0.002f, 0);
     }
 
     bool isObjBiggerThan(GameObject obj, float maxScaleLimit)
