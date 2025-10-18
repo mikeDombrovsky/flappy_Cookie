@@ -22,19 +22,16 @@ public class PauseMenuScript : MonoBehaviour
                 Debug.LogError("musicSlider: " + (musicSlider == null ? "null" : "found"));
                 Debug.LogError("FXSlider: " + (FXSlider == null ? "null" : "found"));
         }
+        float masterVolume = soundMixerManager.GetMasterVolume();
+        float soundFXVolume = soundMixerManager.GetSoundFXVolume();
+        float musicVolume = soundMixerManager.GetMusicVolume();
+        allSoundSlider.GetComponent<UnityEngine.UI.Slider>().value = masterVolume;
+        FXSlider.GetComponent<UnityEngine.UI.Slider>().value = soundFXVolume;
+        musicSlider.GetComponent<UnityEngine.UI.Slider>().value = musicVolume;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
-        if (allSoundSlider != null && soundMixerManager != null)
-        {
-            allSoundSlider.GetComponent<UnityEngine.UI.Slider>().value = soundMixerManager.GetMasterVolume();
-            musicSlider.GetComponent<UnityEngine.UI.Slider>().value = soundMixerManager.GetMusicVolume();
-            FXSlider.GetComponent<UnityEngine.UI.Slider>().value = soundMixerManager.GetSoundFXVolume();
-
-        }
     }
 }

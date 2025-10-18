@@ -31,9 +31,15 @@ public class LogicScript : MonoBehaviour
         }
         pauseMenu.SetActive(false); // Ensure the pause menu is initially inactive
 
-        mixer = FindFirstObjectByType<SoundMixerManager>();// Find the SoundMixerManager in the scene
-        mixer.SetMusicVolume(0.2f); // Set initial music volume
-        
+        // Ensure mixer is assigned (either set in inspector or found at runtime)
+        if (mixer == null)
+        {
+            mixer = FindFirstObjectByType<SoundMixerManager>();
+            if (mixer == null)
+            {
+                Debug.LogWarning("SoundMixerManager not found in scene. Volume controls will be skipped.");
+            }
+        }
     }
     private void Update()
     {
@@ -88,16 +94,19 @@ public class LogicScript : MonoBehaviour
     {
         resetScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        mixer.SetMusicVolume(0.2f); // Restore the music volume
+        mixer.SetMusicVolume(PlayerPrefs.GetFloat("musicVolume", 0.2f)); // Reset music volume to saved level if exists
     }
 
-    public void gameOver()
+    public async void gameOver()
     {
         gameOverScreen.SetActive(true);
         resetScore();
+        float musicVoilume = mixer.GetMusicVolume();
         mixer.SetMusicVolume(0.1f); // Lower the music volume
         Debug.Log("music_volume: " + mixer.GetMusicVolume()); // Log the current music volume
         SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 1f); // Play the game over sound effect
+        await System.Threading.Tasks.Task.Delay(3000); // Wait for 3 seconds
+        mixer.SetMusicVolume(musicVoilume); // Restore the original music volume
     }
 
     public void TogglePauseMenu()
