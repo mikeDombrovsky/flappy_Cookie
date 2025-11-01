@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class LogicScript : MonoBehaviour
 {
@@ -55,6 +56,11 @@ public class LogicScript : MonoBehaviour
     [ContextMenu("Increase Score")]
     public void addScore(int scoreToAdd)
     {
+        if(scoreToAdd <= 0)
+        {
+            Debug.LogWarning("Score to add must be greater than zero.");
+            return;
+        }
         playerScore += scoreToAdd;
         PlayerPrefs.SetInt("playerScore", playerScore); // Save the score to PlayerPrefs
         scoreText.text = playerScore.ToString();
@@ -66,8 +72,12 @@ public class LogicScript : MonoBehaviour
         }
         else if (playerScore >= 10 && SceneManager.GetActiveScene().buildIndex == 1)
         {
-            resetScore();
             ScenesManager.GetComponent<SceneManagerScript>().LoadSceneByIndex(2);
+        }
+        else if (playerScore >= 15 && SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            resetScore();
+            ScenesManager.GetComponent<SceneManagerScript>().LoadSceneByIndex(3);
         }
     }
 
