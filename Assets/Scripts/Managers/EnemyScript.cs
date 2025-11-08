@@ -3,8 +3,8 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float moveSpeed = 1f; // Speed at which the cloud moves
-    public float destroyPositionX = -45f; // X position at which the cloud will be destroyed
+    public float moveSpeed = 5f; // Speed at which the cloud moves
+    public float destroyPositionX = -45f; // X position at which the cloud will be destroye
     void Start()
     {
 
