@@ -7,6 +7,7 @@ public class LogicScript : MonoBehaviour
     private GameObject ScenesManager;
     public int playerScore;
     public Text scoreText;
+    public Text levelText;
     public GameObject gameOverScreen;
 
     public GameObject pauseMenu; // Assign this in the inspector with your pause menu GameObject
@@ -19,11 +20,12 @@ public class LogicScript : MonoBehaviour
 
     
 
-    private void Start()
+    private void Start() 
     {
         ScenesManager = GameObject.Find("ScenesManager");
         playerScore = PlayerPrefs.GetInt("playerScore", 0); // Load the score from PlayerPrefs, default to 0 if not found
         scoreText.text = playerScore.ToString();// Initialize the score text
+        levelText.text = "LVL:" + (SceneManager.GetActiveScene().buildIndex + 1);// Initialize the level text
         pauseMenu = GameObject.Find("PauseMenuCanvas");// find the pause menu
         if (pauseMenu == null)
         {
@@ -98,6 +100,7 @@ public class LogicScript : MonoBehaviour
         }
 
         scoreText.text = playerScore.ToString();
+        levelText.text = "LVL:" + (SceneManager.GetActiveScene().buildIndex + 1);// Update the level text
         PlayerPrefs.SetInt("playerScore", playerScore); // Save the score to PlayerPrefs
     }
 
