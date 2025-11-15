@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class LogicScript : MonoBehaviour
 {
@@ -90,7 +89,10 @@ public class LogicScript : MonoBehaviour
         else if (playerScore >= 5 && playerScore < 10)
         {
             playerScore = 5;
-        }else if (playerScore >= 10)
+        }else if (playerScore >= 10 && playerScore < 15)
+        {
+            playerScore = 10;
+        }else if (playerScore >= 15)
         {
             playerScore = 0;
         }
