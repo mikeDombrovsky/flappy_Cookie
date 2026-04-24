@@ -15,7 +15,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (transform.position.x < destroyPositionX)
         {
-            Debug.Log("Destroying enemy at position: " + transform.position.x);
+            //Debug.Log("Destroying enemy at position: " + transform.position.x);
             Destroy(gameObject); // Destroy the enemy game object
         }
         transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime; // Move the enemy to the left

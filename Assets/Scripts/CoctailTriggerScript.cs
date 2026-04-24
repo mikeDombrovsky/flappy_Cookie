@@ -7,7 +7,7 @@ public class CoctailTriggerScript : MonoBehaviour
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-        Debug.Log("LogicScript found, player score is: " + logic.playerScore);
+        //Debug.Log("LogicScript found, player score is: " + logic.playerScore);
     }
 
     // Update is called once per frame
@@ -19,6 +19,6 @@ public class CoctailTriggerScript : MonoBehaviour
     {
         if(collision.gameObject.layer != 3) { return; }
         logic.addScore(1); // Call the addScore method from TrackScoreScript when the trigger is entered
-        Debug.Log("Trigger entered by: " + collision.gameObject.name);
+        //Debug.Log("Trigger entered by: " + collision.gameObject.name);
     }
 }

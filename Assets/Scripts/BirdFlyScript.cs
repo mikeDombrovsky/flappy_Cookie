@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BirdFlyScript : MonoBehaviour
@@ -11,11 +12,13 @@ public class BirdFlyScript : MonoBehaviour
     int destroyPositionY = -45;
     int destroyPositionY2 = 45;
     public bool isBirdAlive = true; // Flag to check if the bird is active
+    private int playerLives; // Variable to store the player's lives
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();  
+        playerLives = PlayerPrefs.GetInt("playerLives", 3); // Load the player's lives from PlayerPrefs, default to 3 if not found
     }
 
     // Update is called once per frame
@@ -26,14 +29,15 @@ public class BirdFlyScript : MonoBehaviour
             myRigidBody.linearVelocity = Vector2.up * flapStrength;
         }
 
-        
-        
+        playerLives = PlayerPrefs.GetInt("playerLives", 3); // Update the player's lives from PlayerPrefs each frame
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!isBirdAlive) return; // If the bird is already not alive, do nothing
-        if (logic.playerLives > 0)
+        Debug.Log("playerLives: " + playerLives);
+        if (playerLives > 0)
         {
             logic.loseLife(); // Call the loseLife method from LogicScript when a collision occurs
         }

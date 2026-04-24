@@ -15,7 +15,7 @@ public class CloudMoveScript : MonoBehaviour
     {
         if (transform.position.x < destroyPositionX)
         {   
-            Debug.Log("Destroying cloud at position: " + transform.position.x);
+            //Debug.Log("Destroying cloud at position: " + transform.position.x);
             Destroy(gameObject); // Destroy the cloud game object
         }
         transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime; // Move the cloud to the left

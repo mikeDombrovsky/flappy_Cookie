@@ -27,6 +27,9 @@ public class LogicScript : MonoBehaviour
         ScenesManager = GameObject.Find("ScenesManager");
         playerScore = PlayerPrefs.GetInt("playerScore", 0); // Load the score from PlayerPrefs, default to 0 if not found
         playerLives = PlayerPrefs.GetInt("playerLives", 3); // Load the lives from PlayerPrefs, default to 3 if not found
+
+        Debug.Log("initial playerLives: " + playerLives);
+
         scoreText.text = playerScore.ToString();// Initialize the score text
         levelText.text = "LVL:" + (SceneManager.GetActiveScene().buildIndex + 1);// Initialize the level text
         pauseMenu = GameObject.Find("PauseMenuCanvas");// find the pause menu
@@ -105,6 +108,7 @@ public class LogicScript : MonoBehaviour
         scoreText.text = playerScore.ToString();
         levelText.text = "LVL:" + (SceneManager.GetActiveScene().buildIndex + 1);// Update the level text
         PlayerPrefs.SetInt("playerScore", playerScore); // Save the score to PlayerPrefs
+        PlayerPrefs.SetInt("playerLives", 3); // Save refreshed lives to PlayerPrefs
     }
 
 
@@ -114,9 +118,14 @@ public class LogicScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         mixer.SetMusicVolume(PlayerPrefs.GetFloat("musicVolume", 0.2f)); // Reset music volume to saved level if exists
     }
-
+    [ContextMenu("Lose Life")]
     public void loseLife()
-    {
+    {   
+        if(playerLives <= 0)
+        {
+            Debug.LogWarning("Player lives are already at zero. Cannot lose more lives.");
+            return;
+        }
         playerLives--;
         PlayerPrefs.SetInt("playerLives", playerLives); // Save the lives to PlayerPrefs
         SoundFXManager.Instance.PlaySoundFXClip(lostLifeAudio, transform, 1f); // Play the lost life sound effect
@@ -127,7 +136,7 @@ public class LogicScript : MonoBehaviour
         resetScore();
         float musicVoilume = mixer.GetMusicVolume();
         mixer.SetMusicVolume(0.1f); // Lower the music volume
-        Debug.Log("music_volume: " + mixer.GetMusicVolume()); // Log the current music volume
+        //Debug.Log("music_volume: " + mixer.GetMusicVolume()); // Log the current music volume
         SoundFXManager.Instance.PlaySoundFXClip(gameOverSound, transform, 1f); // Play game-over sound effect
         await System.Threading.Tasks.Task.Delay(3000); // Wait for 3 seconds
         mixer.SetMusicVolume(musicVoilume); // Restore the original music volume

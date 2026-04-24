@@ -12,7 +12,7 @@ public class CoctailsMoveScript : MonoBehaviour
         // Check if the cocktail's position is less than the destroy position on the X axis
         if (transform.position.x < destroyPositionX)
         {   
-            Debug.Log("Destroying cocktail at position: " + transform.position.x);
+            //Debug.Log("Destroying cocktail at position: " + transform.position.x);
             Destroy(gameObject); // Destroy the cocktail game object
         }
         transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
